@@ -17,14 +17,19 @@ The AI Prompt Reframer is a lightweight, browser-based tool (initially a bookmar
 - Heavy frameworks like React, Vue, or UI component libraries (Tailwind, Material UI).
 - Handling non-text inputs (like images or document uploads).
 - Integrating with APIs other than Gemini for prompt improvement (in Version 1).
+- User accounts, authentication, or roles.
+- Cloud database, application hosting, or cloud deployments.
+- Payment system or monetization.
+- Usage tracking or analytics.
 
 ## Users
 Professionals, developers, and writers heavily leveraging AI tools who want to maximize their outputs by automatically applying advanced prompt engineering techniques (role, context, steps, output format) to their stream-of-consciousness input.
 
 ## Constraints
 - **Technical**: Must be vanilla JavaScript, HTML, and CSS to remain portable as a bookmarklet. Must securely fetch from Gemini API directly in the browser. 
-- **Security**: Because it's client-side only, the API key must be locally managed (`localStorage`) and explicitly requested on the first run.
+- **Security**: Because it's client-side only, the API key must be locally managed (`localStorage`). Avoid hardcoding keys at all costs.
 - **UX**: The injected UI must be clean, use a shadow DOM (or uniquely scoped classes) to avoid breaking the host site's layout.
+- **Development Goal**: Local-first tool strictly for personal development. Do not over-engineer authentication, hosting, or production infrastructure.
 
 ## Success Criteria
 - [ ] Bookmarklet correctly identifies and extracts text from ChatGPT, Claude, and Gemini input boxes.

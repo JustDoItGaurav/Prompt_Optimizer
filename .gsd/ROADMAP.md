@@ -12,26 +12,18 @@
 
 ## Phases
 
-### Phase 1: Core Extractor and Fetcher
+### Phase 1: Bookmarklet MVP (Local First)
 **Status**: ⬜ Not Started
-**Objective**: Build vanilla JavaScript modules to 1) extract text from known AI playgrounds, 2) handle the API key initialization/storage, and 3) manage the asynchronous Gemini REST API call.
-**Requirements**: REQ-01, REQ-02, REQ-03
+**Objective**: Build a fully functional, local browser bookmarklet encompassing extraction, UI presentation, API calling, and replacing text to serve as the v1 MVP.
+**Requirements**: 
+- Extract prompt from page using adapter pattern.
+- Improve prompt using Gemini API.
+- Show improved prompt in modal (loading indicator, error handling).
+- Copy button & Replace button.
+- Settings button & settings modal (manage API Key, Improvement Mode, Target AI).
+- Save API key securely in `localStorage`.
+- Comprehensive error handling for missing keys and API failures.
 
-### Phase 2: Vanilla UI Layer
+### Phase 2: Chrome Extension Transition (v2.0)
 **Status**: ⬜ Not Started
-**Objective**: Design and inject a clean, modular HTML/CSS modal into the page via a bookmarklet execution that displays a spinner during loading, then the Gemini result or any errors.
-**Requirements**: REQ-04
-
-### Phase 3: Text Replacer & Interaction Wiring
-**Status**: ⬜ Not Started
-**Objective**: Add robust Javascript routines that replace the textbox contents seamlessly, firing necessary DOM events to trigger framework updates (e.g., React's `onChange`), and hook up the Copy, Close, and Reset logic.
-**Requirements**: REQ-05
-
-### Phase 4: Bookmarklet Packaging & Testing
-**Status**: ⬜ Not Started
-**Objective**: Minify the solution, generate the URI-encoded bookmarklet link, test on target sites (Claude, ChatGPT, Gemini), and fix cross-origin or CSP (Content Security Policy) issues that might occur.
-**Requirements**: REQ-06
-
-### Phase 5: Chrome Extension Transition (v2.0)
-**Status**: ⬜ Not Started
-**Objective**: Refactor the codebase to execute as a true Chrome profile extension instead of a bookmarklet execution, using `manifest.json`, background workers, and content scripts.
+**Objective**: Refactor the bookmarklet codebase to execute as a true Chrome profile extension, using `manifest.json`, background workers, and content scripts, to bypass CSP restrictions.
