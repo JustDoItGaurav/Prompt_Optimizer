@@ -13,7 +13,7 @@
 ## Phases
 
 ### Phase 1: Bookmarklet MVP (Local First)
-**Status**: ⬜ Not Started
+**Status**: ✅ Complete
 **Objective**: Build a fully functional, local browser bookmarklet encompassing extraction, UI presentation, API calling, and replacing text to serve as the v1 MVP.
 **Requirements**: 
 - Extract prompt from page using adapter pattern.
