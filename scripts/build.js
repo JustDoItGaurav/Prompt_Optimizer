@@ -2,7 +2,7 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const srcFile = path.join(__dirname, '..', 'src', 'index.js');
+const srcFile = path.join(__dirname, '..', 'src', 'bookmarklet.js');
 const distFile = path.join(__dirname, '..', 'dist', 'bookmarklet.js');
 const rawDistFile = path.join(__dirname, '..', 'dist', 'raw.js');
 

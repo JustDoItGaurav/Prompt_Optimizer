@@ -4,9 +4,9 @@ import * as gemini from './gemini.js';
 import * as generic from './generic.js';
 import { getSettings } from '../storage.js';
 
-export function getAdapter() {
+export async function getAdapter() {
     // Check settings for manual override
-    const settings = getSettings();
+    const settings = await getSettings();
     if (settings.targetOverride && settings.targetOverride !== 'auto') {
         switch (settings.targetOverride) {
             case 'chatgpt': return chatgpt;

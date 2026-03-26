@@ -6,48 +6,75 @@ const DEFAULT_SETTINGS = {
     targetOverride: 'auto' // auto, chatgpt, claude, gemini, generic
 };
 
-export function getSettings() {
-    if (typeof window === 'undefined' || !window.localStorage) {
-        return DEFAULT_SETTINGS;
+export async function getSettings() {
+    if (typeof chrome !== 'undefined' && chrome.storage) {
+        return new Promise((resolve) => {
+            chrome.storage.local.get([STORAGE_KEY], (result) => {
+                if (result[STORAGE_KEY]) {
+                    resolve({ ...DEFAULT_SETTINGS, ...result[STORAGE_KEY] });
+                } else {
+                    resolve(DEFAULT_SETTINGS);
+                }
+            });
+        });
     }
     
-    try {
-        const stored = window.localStorage.getItem(STORAGE_KEY);
-        if (stored) {
-            return { ...DEFAULT_SETTINGS, ...JSON.parse(stored) };
+    // Fallback for non-extension environments (bookmarklet)
+    if (typeof window !== 'undefined' && window.localStorage) {
+        try {
+            const stored = window.localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                return { ...DEFAULT_SETTINGS, ...JSON.parse(stored) };
+            }
+        } catch (e) {
+            console.warn('AI Prompt Reframer: Failed to read from localStorage', e);
         }
-    } catch (e) {
-        console.warn('AI Prompt Reframer: Failed to read from localStorage', e);
     }
     
     return DEFAULT_SETTINGS;
 }
 
-export function saveSettings(settings) {
-    if (typeof window === 'undefined' || !window.localStorage) {
-        return false;
+export async function saveSettings(settings) {
+    const current = await getSettings();
+    const updated = { ...current, ...settings };
+
+    if (typeof chrome !== 'undefined' && chrome.storage) {
+        return new Promise((resolve) => {
+            chrome.storage.local.set({ [STORAGE_KEY]: updated }, () => {
+                resolve(true);
+            });
+        });
     }
-    
-    try {
-        const current = getSettings();
-        const updated = { ...current, ...settings };
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-        return true;
-    } catch (e) {
-        console.error('AI Prompt Reframer: Failed to save to localStorage', e);
-        return false;
+
+    if (typeof window !== 'undefined' && window.localStorage) {
+        try {
+            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+            return true;
+        } catch (e) {
+            console.error('AI Prompt Reframer: Failed to save to localStorage', e);
+            return false;
+        }
     }
+    return false;
 }
 
-export function clearSettings() {
-    if (typeof window === 'undefined' || !window.localStorage) {
-        return false;
+export async function clearSettings() {
+    if (typeof chrome !== 'undefined' && chrome.storage) {
+        return new Promise((resolve) => {
+            chrome.storage.local.remove([STORAGE_KEY], () => {
+                resolve(true);
+            });
+        });
     }
-    try {
-        window.localStorage.removeItem(STORAGE_KEY);
-        return true;
-    } catch (e) {
-        console.error('AI Prompt Reframer: Failed to clear localStorage', e);
-        return false;
+
+    if (typeof window !== 'undefined' && window.localStorage) {
+        try {
+            window.localStorage.removeItem(STORAGE_KEY);
+            return true;
+        } catch (e) {
+            console.error('AI Prompt Reframer: Failed to clear localStorage', e);
+            return false;
+        }
     }
+    return false;
 }

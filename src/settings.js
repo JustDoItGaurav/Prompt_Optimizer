@@ -1,6 +1,6 @@
 import { getSettings, saveSettings } from './storage.js';
 
-export function showSettings(onCloseCallback) {
+export async function showSettings(onCloseCallback) {
     // 1. Unmount existing if applicable
     let existingModal = document.getElementById('ai-prompt-reframer-settings');
     if (existingModal) {
@@ -8,7 +8,7 @@ export function showSettings(onCloseCallback) {
     }
 
     // 2. Fetch current
-    const current = getSettings();
+    const current = await getSettings();
 
     // 3. Create Container
     const modal = document.createElement('div');
@@ -75,12 +75,12 @@ export function showSettings(onCloseCallback) {
         if (onCloseCallback) onCloseCallback();
     });
 
-    document.getElementById('pr-settings-save').addEventListener('click', () => {
+    document.getElementById('pr-settings-save').addEventListener('click', async () => {
         const apiKey = document.getElementById('pr-api-key').value.trim();
         const mode = document.getElementById('pr-improve-mode').value;
         const target = document.getElementById('pr-target-override').value;
 
-        saveSettings({
+        await saveSettings({
             geminiApiKey: apiKey,
             improvementMode: mode,
             targetOverride: target

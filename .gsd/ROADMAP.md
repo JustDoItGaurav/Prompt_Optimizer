@@ -25,5 +25,8 @@
 - Comprehensive error handling for missing keys and API failures.
 
 ### Phase 2: Chrome Extension Transition (v2.0)
-**Status**: ⬜ Not Started
+**Status**: ✅ Complete
 **Objective**: Refactor the bookmarklet codebase to execute as a true Chrome profile extension, using `manifest.json`, background workers, and content scripts, to bypass CSP restrictions.
+### Phase 3: Prompt Engineering Architecture (v2.1)
+**Status**: ✅ Complete
+**Objective**: Overhaul the naive system instruction embedded in the API caller into a meticulously crafted meta-prompt enforcing highly structured constraints mapping user intent efficiently.

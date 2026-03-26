@@ -33,7 +33,7 @@ function findLargestInput() {
         if (el.tagName.toLowerCase() === 'textarea' || el.tagName.toLowerCase() === 'input') {
             text = el.value || '';
         } else {
-            text = el.innerText || '';
+            text = el.innerText || el.textContent || '';
         }
 
         if (text.length > maxLen) {
@@ -83,7 +83,7 @@ export function getPrompt() {
     if (el.tagName.toLowerCase() === 'textarea' || el.tagName.toLowerCase() === 'input') {
         return el.value || '';
     } else {
-        return el.innerText || '';
+        return el.innerText || el.textContent || '';
     }
 }
 

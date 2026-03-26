@@ -4,7 +4,8 @@ export function getPrompt() {
     // Specifically target ChatGPT's primary prompt textarea
     const specificEl = document.querySelector('#prompt-textarea');
     if (specificEl) {
-        return specificEl.value || '';
+        const text = specificEl.tagName.toLowerCase() === 'textarea' ? specificEl.value : (specificEl.innerText || specificEl.textContent);
+        if (text) return text;
     }
     return generic.getPrompt();
 }

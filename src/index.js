@@ -4,8 +4,8 @@ import { showSettings } from './settings.js';
 import { improvePrompt } from './api.js';
 import { showMainApp } from './main-ui.js';
 
-export function init() {
-    const adapter = getAdapter();
+export async function init() {
+    const adapter = await getAdapter();
     const originalPrompt = adapter.getPrompt();
 
     if (!originalPrompt || originalPrompt.trim() === '') {
@@ -13,7 +13,7 @@ export function init() {
         return;
     }
 
-    const settings = getSettings();
+    const settings = await getSettings();
     if (!settings.geminiApiKey) {
         showSettings(() => init()); // Loop back to init after close
         return;
@@ -30,7 +30,4 @@ export function init() {
     });
 }
 
-// Ensure execution when bundled into an IIFE bookmarklet
-if (typeof document !== 'undefined') {
-   init();
-}
+// Remove auto-execution
