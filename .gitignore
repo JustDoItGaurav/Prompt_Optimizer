@@ -1,0 +1,8 @@
+.gsd/
+dist/
+template-project/
+.agent/
+node_modules/
+.env
+*.zip
+.DS_Store
