@@ -1,5 +1,5 @@
 // ============================================================
-//  improvePrompt.js  —  Prompt Engineering Engine v2
+//  api.js  —  Prompt Engineering Engine v2
 //  Drop-in replacement. Same public API, massively upgraded.
 // ============================================================
 
