@@ -1,5 +1,5 @@
 .gsd/
-dist/
+
 template-project/
 .agent/
 node_modules/
